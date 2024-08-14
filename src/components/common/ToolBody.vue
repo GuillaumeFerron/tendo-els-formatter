@@ -3,7 +3,7 @@
     <div class="card-body px-5">
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <h3>Tendo IR Corrector</h3>
+          <h3>ELS Formatter</h3>
         </div>
         <div v-if="tooltipContent.length > 0" v-tooltip="{
           content: tooltipContent,
@@ -14,15 +14,17 @@
           <h3>ⓘ</h3>
         </div>
       </div>
-      -- Tool Here --
+      <ElsFormatter />
     </div>
   </div>
 </template>
 
 <script>
+import ElsFormatter from '../ElsFormatter.vue'
+
 export default {
   components: {
-    //
+    ElsFormatter
   },
   data() {
     return {
