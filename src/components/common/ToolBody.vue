@@ -1,21 +1,19 @@
 <template>
-  <div class="card mb-0 w-75">
-    <div class="card-body px-5">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <h3>ELS Formatter</h3>
-        </div>
-        <div v-if="tooltipContent.length > 0" v-tooltip="{
-          content: tooltipContent,
-          html: true,
-          hideTriggers: ['click'],
-          autoHide: true
-        }" class="clickable">
-          <h3>ⓘ</h3>
-        </div>
+  <div class="card p-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h3>ELS Formatter</h3>
       </div>
-      <ElsFormatter />
+      <div v-if="tooltipContent.length > 0" v-tooltip="{
+        content: tooltipContent,
+        html: true,
+        hideTriggers: ['click'],
+        autoHide: true
+      }" class="clickable">
+        <h3>ⓘ</h3>
+      </div>
     </div>
+    <ElsFormatter />
   </div>
 </template>
 
@@ -29,7 +27,7 @@ export default {
   data() {
     return {
       tooltip: {
-        old: '',
+        old: 'https://docs.google.com/spreadsheets/d/1RU6NwkdMvsKxcMbCcTkgVrzYQosqgIJtGtlYBnlJb9s/edit?gid=0#gid=0',
         guide: ''
       }
     }
