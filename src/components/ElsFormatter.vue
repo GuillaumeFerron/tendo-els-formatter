@@ -3,15 +3,22 @@
     <div class="row">
       <div class="col-12">
         <div>
-          <label for="schedule">Raw Input</label>
-          <textarea class="form-control" id="schedule" v-model="data.raw" rows="4" @change="recomputeOutput"></textarea>
+          <label for="raw">Raw Input</label><br>
+          <small><i>Recommended</i></small>
+          <textarea class="form-control" id="raw" v-model="data.raw" rows="4" @change="recomputeOutput"></textarea>
+        </div>
+        <div class="mt-3">
+          <label for="file">Raw File</label><br>
+          <small><i>Only accepts CSV</i></small>
+          <input type="file" class="form-control" id="file" @change="onFileChange" accept=".csv" :multiple="false" />
         </div>
       </div>
     </div>
-    <hr class="mt-4">
+    <hr class=" mt-4">
     <div class="row mt-3 w-100">
       <h5>Output</h5>
-      <small v-if="(outputMapped || []).length > 1000"><i>Note: Only the first {{ displayLimit }} records (out of {{
+      <small v-if="(outputMapped || []).length > 1000"><i>Note: Only the first {{ displayLimit }} records (out of
+          {{
           (outputMapped || []).length }})
           have been displayed.</i></small>
       <div class="my-2 px-0 overflow-scroll output border rounded shadow">
@@ -23,7 +30,8 @@
                 <select :id="`${header}-select`" class="form-control p-0" v-model="data.mapping[header]"
                   @change="recomputeOutputMapped">
                   <option value=""></option>
-                  <option v-for="inputHeader in inputHeaders" :value="inputHeader" :key="inputHeader">{{ inputHeader }}
+                  <option v-for="inputHeader in inputHeaders" :value="inputHeader" :key="inputHeader">{{
+                    inputHeader }}
                   </option>
                 </select>
               </th>
@@ -40,7 +48,9 @@
     <hr class="mt-4">
     <div class="row mt-3 w-100">
       <h5>Actions</h5>
-      <small v-if="(outputMapped || []).length > csvLimit"><i>Note: the files downloaded will be split into {{ csvLimit }} records
+      <small v-if="(outputMapped || []).length > csvLimit"><i>Note: the files downloaded will be split into {{
+          csvLimit
+          }} records
           chunks.</i></small>
       <div class="row">
         <div class="col-3">
@@ -121,6 +131,15 @@
       }
     },
     methods: {
+      onFileChange(e) {
+        var file = (e.target.files || e.dataTransfer.files)[0];
+        var reader = new FileReader()
+        reader.readAsText(file, "UTF-8")
+        reader.onload = (evt) => {
+          this.data.raw = evt.target.result.replace(/,/g, '\t')
+          this.recomputeOutput()
+        }
+      },
       recomputeOutput() {
         try {
           this.output = (this.data.raw || '')
