@@ -28,7 +28,7 @@ export default {
     return {
       tooltip: {
         old: 'https://docs.google.com/spreadsheets/d/1RU6NwkdMvsKxcMbCcTkgVrzYQosqgIJtGtlYBnlJb9s/edit?gid=0#gid=0',
-        guide: ''
+        guide: 'https://scribehow.com/shared/Using_the_ELS_Formatter__mxShRbEDQlmoY0zXWBmeXQ'
       }
     }
   },
