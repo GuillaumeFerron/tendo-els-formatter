@@ -144,6 +144,7 @@
         try {
           this.output = (this.data.raw || '')
             .split(/\r?\n|\r|\n/g)
+            .filter(_ => _ != "")
             .map(_ => _.split(/\t/g))
             .slice(1)
           this.recomputeOutputMapped()
@@ -301,7 +302,6 @@
         if (this.hiredDateIndex == -1) {
           return date
         }
-
         return this.convertDate(this.output.slice(0, 100).map(_ => _[this.hiredDateIndex]), date)
       },
       cleanBirthdate(date) {
